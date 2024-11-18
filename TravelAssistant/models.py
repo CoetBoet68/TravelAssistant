@@ -17,16 +17,3 @@ class DjangoMigrations(models.Model):
     class Meta:
         managed = False
         db_table = 'django_migrations'
-
-
-class TravelapisEventsavailable(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    date = models.DateField()
-    name = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    description = models.TextField()
-    type = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'travelapis_eventsavailable'

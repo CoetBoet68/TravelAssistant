@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
 
-app_name = 'travel_api'
+app_name = 'travel_apis'
 
 urlpatterns = [
-    path('events', views.events_available_list, name='events_available_list'),
+    path('locations/all', views.locations_list, name='locations_list'),
 ]

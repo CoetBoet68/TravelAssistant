@@ -1,9 +1,14 @@
 from django.db import models
 
-class EventsAvailable(models.Model):
-    date = models.DateField(auto_now=True)
-    name = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    description = models.TextField()
-    type = models.CharField(max_length=100)
+
+class Locations(models.Model):
+    id = models.CharField(primary_key=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=200)
+    categories = models.JSONField(default=list)
+    lon = models.FloatField()
+    lat = models.FloatField()
+    prioritized = models.BooleanField(default=False)
     objects = models.Manager()
+
+
