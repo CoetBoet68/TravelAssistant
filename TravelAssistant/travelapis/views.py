@@ -6,8 +6,7 @@ from . import models
 
 
 @api_view(['GET'])
-def events_available_list(request):
-    events = models.EventsAvailable.objects.all().values()
-    events_list = list(events)
-    return Response(events_list, status=status.HTTP_200_OK)
+def locations_list(request):
+    locations = list(models.Locations.objects.all().values())
+    return Response(locations, status=status.HTTP_200_OK)
 
