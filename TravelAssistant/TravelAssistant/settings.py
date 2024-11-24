@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'travelapis',
     'corsheaders',
     'rest_framework',
-
 ]
 
 MIDDLEWARE = [
