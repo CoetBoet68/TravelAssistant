@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Locations
+from .langchain import langchainAPI
 
 
 @api_view(['GET'])
@@ -24,4 +25,18 @@ def update_location_priority(request):
         return Response(location, status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def location_llm_search(request):
+    engine = langchainAPI()
+    query = request.data['query']
+    response = engine.get_response(query)
+    if type(response) == list:
+        locations = Locations.objects.returnLLMResults(response)
+    else:
+        locations = {
+            "error": "LLM didn't respond correctly"
+        }
+    return Response(locations,status=status.HTTP_200_OK)
+
 

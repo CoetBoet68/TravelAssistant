@@ -97,17 +97,22 @@ class LocationManager(models.Manager):
             return LocationsSerializer(Locations.objects.get(id=body.get("id"))).data
         return None
 
+    def returnLLMResults(self, list):
+        locations = Locations.objects.filter(id__in=list)
+        return LocationsSerializer(locations, many=True).data
 
 class Locations(models.Model):
     id = models.CharField(primary_key=True)
     name = models.CharField(blank=True, null=True)
     address = models.CharField()
     categories = models.JSONField(default=list)
+    categories_text = models.TextField(blank=True, null=True)
     lon = models.FloatField()
     lat = models.FloatField()
     prioritized = models.BooleanField(default=False)
     rating = models.FloatField(null=True)
     hours = models.JSONField(default=list, null=True)
+    hours_text = models.TextField(blank=True, null=True)
     priceLevel = models.CharField(max_length=255, null=True)
     priceMin = models.IntegerField(null=True)
     priceMax = models.IntegerField(null=True)
